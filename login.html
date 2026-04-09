@@ -32,7 +32,7 @@ async function login() {
 
     if (data.success) {
         localStorage.setItem("token", data.token);
-        window.location.href = "admin.html";
+        window.location.href = "dashboard.html";
     } else {
         document.getElementById("message").innerText = "Invalid login";
     }
