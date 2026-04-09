@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<head> <link rel="stylesheet" href="style.css">
+<head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Clinical Anaesthetists Association of Lesotho</title>
@@ -8,35 +8,57 @@
 <style>
 body { margin:0; font-family:Arial, sans-serif; background:#f4f8fc; }
 
-/* HEADER */
+/* HEADER (transparent over hero) */
 .header {
-  display:flex; align-items:center; justify-content:center;
-  background:linear-gradient(to right,#0b3d91,#1e5bb8);
-  color:white; padding:20px; gap:15px; flex-wrap:wrap;
+  position:absolute; top:0; left:0; width:100%; z-index:10;
+  display:flex; align-items:center; justify-content:space-between;
+  padding:15px 30px; color:white;
 }
-.logo { width:80px; }
+.logo { width:70px; }
 
 /* NAV */
 .nav {
-  display:flex; justify-content:center; flex-wrap:wrap;
-  background:#0b3d91;
+  display:flex; gap:20px; flex-wrap:wrap;
 }
 .nav a {
-  color:white; padding:14px 18px; text-decoration:none; cursor:pointer;
+  color:white; text-decoration:none; font-weight:500; cursor:pointer;
 }
-.nav a:hover { background:#163f7a; }
+.nav a:hover { text-decoration:underline; }
 
-/* SLIDER */
-.slider { position:relative; max-width:100%; height:400px; overflow:hidden; }
-.slides { width:100%; height:400px; object-fit:cover; display:none; }
+.login-btn {
+  background:#ffcc00; color:#000; padding:8px 14px; border-radius:4px;
+}
 
-/* SECTION */
-.section { display:none; padding:30px; max-width:1000px; margin:auto; }
-.active { display:block; }
+/* HERO / SLIDER */
+.slider { position:relative; height:100vh; overflow:hidden; }
+.slides { width:100%; height:100vh; object-fit:cover; display:none; }
 
-/* CARD */
+/* DARK OVERLAY */
+.overlay {
+  position:absolute; top:0; left:0; width:100%; height:100%;
+  background:rgba(0,0,0,0.55);
+  display:flex; flex-direction:column; justify-content:center; align-items:center;
+  text-align:center; color:white; padding:20px;
+}
+
+.overlay h1 { font-size:60px; margin-bottom:10px; }
+.overlay p { font-size:20px; margin-bottom:30px; }
+
+.overlay-buttons {
+  display:flex; gap:25px; flex-wrap:wrap; justify-content:center;
+}
+
+.overlay-buttons a {
+  background:#1e2a78; color:white; padding:14px 22px;
+  text-decoration:none; border-radius:6px; font-weight:bold;
+}
+.overlay-buttons a:hover { background:#0b3d91; }
+
+/* CONTENT */
+.section { padding:40px 20px; max-width:1100px; margin:auto; }
+
 .card {
-  background:white; padding:20px; margin:15px 0;
+  background:white; padding:20px; margin:20px 0;
   border-radius:10px; box-shadow:0 2px 8px rgba(0,0,0,0.1);
 }
 
@@ -49,16 +71,11 @@ button:hover { background:#163f7a; }
 /* FOOTER */
 footer {
   background:#0b3d91; color:white; text-align:center;
-  padding:15px; margin-top:30px;
+  padding:20px; margin-top:30px;
 }
 </style>
 
 <script>
-function showSection(id) {
-  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-}
-
 // SLIDER
 let slideIndex = 0;
 function showSlides() {
@@ -69,70 +86,55 @@ function showSlides() {
   slideIndex++;
   if (slideIndex > slides.length) { slideIndex = 1 }
   slides[slideIndex-1].style.display = "block";
-  setTimeout(showSlides, 3000);
+  setTimeout(showSlides, 4000);
 }
 window.onload = showSlides;
 </script>
 
 </head>
-  <script src="script.js"></script>
 <body>
 
-<header class="header">
-  <img src="image/logo.png" class="logo">
-  <div>
-    <h1>Clinical Anaesthetists Association of Lesotho</h1>
-    <p>Safe Anaesthesia • Professional Excellence • Collaboration</p>
-  </div>
-</header>
-
-<nav class="nav">
-  <a onclick="showSection('home')">Home</a>
-  <a onclick="showSection('about')">About</a>
-  <a onclick="showSection('education')">Education</a>
-  <a onclick="showSection('leadership')">Leadership</a>
-  <a onclick="showSection('membership')">Membership</a>
-  <a onclick="showSection('contact')">Contact</a>
-  <a href="login.html" class="btn">Member Login</a>
-</nav>
-
-<!-- HOME -->
-<section id="home" class="section active">
-
+<!-- HERO SECTION -->
 <div class="slider">
+
+  <!-- HEADER ON TOP -->
+  <header class="header">
+    <div style="display:flex; align-items:center; gap:10px;">
+      <img src="image/logo.png" class="logo">
+      <strong>CAAL</strong>
+    </div>
+
+    <nav class="nav">
+      <a href="#about">About</a>
+      <a href="#education">Education</a>
+      <a href="#leadership">Events</a>
+      <a href="#membership">Membership</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <!-- SLIDES -->
   <img class="slides" src="image/picture 1.jpeg">
-  <img class="slides" src="image/picture.jpeg">
-  
+  <img class="slides" src="images/picture.jpeg">
+ 
+  <!-- OVERLAY TEXT -->
   <div class="overlay">
-  <h1>Welcome to CAAL</h1>
-  <p>Safe Anaesthesia • Professional Excellence • Collaboration</p>
+    <h1>Welcome to CAAL</h1>
+    <p>Safe Anaesthesia • Professional Excellence • Collaboration</p>
 
-  <div class="overlay-buttons">
-    <a href="#">Anaesthesia Professionals</a>
-    <a href="#">Membership Login</a>
-    <a href="#">Join Now</a>
+    <div class="overlay-buttons">
+      <a href="#membership">Anaesthesia Professionals</a>
+      <a href="#contact">membership Login</a>
+      <a href="#about">register now</a>
+    </div>
   </div>
 </div>
-</div>
-  
-  </div>
-  
+
+<!-- CONTENT BELOW HERO -->
+
+<section id="about" class="section">
   <div class="card">
-<h2>Welcome</h2>
-<div class="card">
-<div class="slider" style="height:250px;">
-  <img src="image/easter.jpeg" style="width:100%; height:100%; object-fit:cover; border-radius:8px;">
-
-  <div class="overlay">
-    <h3>Latest Update</h3>
-    <p>Easter Message</p>
-  </div>
-</div>
-</div>
-
-</section>
-
-<!-- ABOUT -->
+   <!-- ABOUT -->
 <section id="about" class="section">
 <body>
 <section class="card">
@@ -159,45 +161,33 @@ window.onload = showSlides;
     <a href="about.html" class="btn">Read More</a>
 </section>
 </div>
+</section>
 
-
-<!-- EDUCATION -->
 <section id="education" class="section">
-<h2>Education</h2>
-<div class="card">Refresher courses</div>
-<div class="card">Research programs</div>
+  <div class="card">Training & Continuous Professional Development</div>
 </section>
 
-<!-- LEADERSHIP -->
-<section id="leadership" class="section">
-<h2>Leadership</h2>
-<div class="card">President: Tebatso Nkoko</div>
-<div class="card">Secretary: Thato Lerotholi</div>
-</section>
+<section id="Events" class="section">
+  <div class="card">General Meeting 15th April 2026</div>
+ </section>
 
-<!-- MEMBERSHIP -->
 <section id="membership" class="section">
-<h2>Membership</h2>
-<div class="card">Membership to the association is open to every clinical practitioner, with anaesthetic qualification, who is registered with any of the health professions and/or councils of Lesotho.
+ <div class="card">Membership to the association is open to every clinical practitioner, with anaesthetic qualification, who is registered with any of the health professions and/or councils of Lesotho.
   Prospective members must apply for membership and upon approval will be expected to pay subscription fee which shall be determined by the Executive Committee from time to time.
 </div>
-<div class="card">Benefits: Training, networking, representation</div>
-</section>
 
-<!-- CONTACT -->
 <section id="contact" class="section">
-<h2>Contact</h2>
-<div class="card">
-<p>Email: clinicalanaesthetists@gmail.com</p>
-<p>Location: Maseru, Lesotho</p>
-</div>
+  <div class="card">
+    <p>Email: clinicalanaesthetists@gmail.com</p>
+    <p>Location: Maseru, Lesotho</p>
+  </div>
 
-<form>
-<input placeholder="Name" required>
-<input type="email" placeholder="Email" required>
-<textarea placeholder="Message" required></textarea>
-<button type="submit">Send</button>
-</form>
+  <form>
+    <input placeholder="Name" required>
+    <input type="email" placeholder="Email" required>
+    <textarea placeholder="Message" required></textarea>
+    <button type="submit">Send</button>
+  </form>
 </section>
 
 <footer>
