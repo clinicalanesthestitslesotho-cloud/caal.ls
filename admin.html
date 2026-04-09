@@ -1,0 +1,24 @@
+<h2>Admin Panel</h2>
+
+<input id="title" placeholder="Title"><br><br>
+<textarea id="content" placeholder="Write update..."></textarea><br><br>
+
+<input type="file" id="image"><br><br>
+
+<button onclick="postUpdate()">Publish</button>
+
+<script>
+async function postUpdate() {
+    const formData = new FormData();
+    formData.append("title", document.getElementById("title").value);
+    formData.append("content", document.getElementById("content").value);
+    formData.append("image", document.getElementById("image").files[0]);
+
+    await fetch('http://localhost:3000/api/updates', {
+        method: 'POST',
+        body: formData
+    });
+
+    alert("Posted!");
+}
+</script>
