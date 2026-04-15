@@ -1,0 +1,99 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f4f8fc;
+}
+
+/* HEADER */
+.header {
+  position: absolute;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 15px 30px;
+  color: white;
+  z-index: 10;
+}
+
+.logo { width: 60px; }
+
+.nav {
+  display: flex;
+  gap: 15px;
+}
+
+.tablink {
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  padding: 8px;
+}
+
+.tablink.active {
+  color: #ffcc00;
+  border-bottom: 2px solid #ffcc00;
+}
+
+/* HERO */
+.slider {
+  height: 100vh;
+  position: relative;
+}
+
+.slides {
+  width: 100%;
+  height: 100vh;
+  object-fit: cover;
+  display: none;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  background: rgba(0,0,0,0.5);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* CONTENT */
+.section {
+  padding: 40px 20px;
+  max-width: 1000px;
+  margin: auto;
+}
+
+.card {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+/* TABS */
+.tabcontent {
+  display: none;
+}
+
+.active-tab {
+  display: block;
+}
+
+/* GRID UPDATES */
+#updates {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 15px;
+}
+
+/* FOOTER */
+footer {
+  background: #0b3d91;
+  color: white;
+  text-align: center;
+  padding: 20px;
+}
