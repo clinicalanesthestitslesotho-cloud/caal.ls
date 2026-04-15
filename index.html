@@ -104,12 +104,12 @@ window.onload = showSlides;
       <strong>CAAL</strong>
     </div>
 
- <nav class="nav">
-  <a class="tablink" onclick="openTab('about')">About</a>
-  <a class="tablink" onclick="openTab('education')">Education</a>
-  <a class="tablink" onclick="openTab('events')">Events</a>
-  <a class="tablink" onclick="openTab('membership')">Membership</a>
-  <a class="tablink" onclick="openTab('contact')">Contact</a>
+<nav class="nav">
+  <button class="tablink active" onclick="openTab(event, 'about')">About</button>
+  <button class="tablink" onclick="openTab(event, 'education')">Education</button>
+  <button class="tablink" onclick="openTab(event, 'events')">Events</button>
+  <button class="tablink" onclick="openTab(event, 'membership')">Membership</button>
+  <button class="tablink" onclick="openTab(event, 'contact')">Contact</button>
 </nav>
   </header>
 
@@ -131,7 +131,7 @@ window.onload = showSlides;
 </div>
 
 <!-- CONTENT BELOW HERO -->
-
+<section id="updates" class="section"></section>
 <section id="about" class="section">
   <div class="card">
    <!-- ABOUT -->
@@ -193,6 +193,79 @@ window.onload = showSlides;
 <footer>
 © 2026 Clinical Anaesthetists Association of Lesotho
 </footer>
+<script>
+console.log("Website loaded");
 
+// =====================
+// SLIDER
+// =====================
+let slideIndex = 0;
+function showSlides() {
+  let slides = document.getElementsByClassName("slides");
+  for (let i = 0; i < slides.length; i++) {
+    slides[i].style.display = "none";
+  }
+  slideIndex++;
+  if (slideIndex > slides.length) { slideIndex = 1; }
+  slides[slideIndex - 1].style.display = "block";
+  setTimeout(showSlides, 4000);
+}
+
+// =====================
+// LOAD UPDATES FROM API
+// =====================
+async function loadUpdates() {
+  try {
+    const res = await fetch('http://localhost:3000/api/updates');
+    const data = await res.json();
+
+    const container = document.getElementById("updates");
+
+    if (!container) return;
+
+    container.innerHTML = ""; // clear old content
+
+    data.forEach(item => {
+      let div = document.createElement("div");
+      div.className = "card";
+      div.innerHTML = `<h3>${item.text}</h3>`;
+      container.appendChild(div);
+    });
+
+  } catch (error) {
+    console.error("Error loading updates:", error);
+  }
+}
+
+// =====================
+// MODERN TAB SYSTEM
+// =====================
+function openTab(evt, tabId) {
+  let contents = document.getElementsByClassName("tabcontent");
+  let links = document.getElementsByClassName("tablink");
+
+  for (let i = 0; i < contents.length; i++) {
+    contents[i].classList.remove("active-tab");
+  }
+
+  for (let i = 0; i < links.length; i++) {
+    links[i].classList.remove("active");
+  }
+
+  document.getElementById(tabId).classList.add("active-tab");
+
+  if (evt) {
+    evt.currentTarget.classList.add("active");
+  }
+}
+
+// =====================
+// INITIAL LOAD
+// =====================
+window.addEventListener("load", () => {
+  showSlides();
+  loadUpdates();
+});
+</script>
 </body>
 </html>
