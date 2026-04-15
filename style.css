@@ -1,3 +1,53 @@
+/* HEADER LAYOUT */
+.header {
+  display: flex;
+  justify-content: space-between; /* logo left, tabs right */
+  align-items: center;
+  padding: 15px 30px;
+}
+
+/* NAV RIGHT ALIGN */
+.nav {
+  display: flex;
+  gap: 20px;
+  justify-content: flex-end;
+}
+
+/* TAB BUTTONS */
+.tablink {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-weight: 500;
+  padding: 8px 12px;
+  position: relative;
+  transition: 0.3s;
+}
+
+/* ACTIVE TAB */
+.tablink.active {
+  color: #ffcc00;
+}
+
+.tablink.active::after {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: #ffcc00;
+}
+
+/* TAB CONTENT */
+.tabcontent {
+  display: none; /* 👈 hides all tabs by default */
+}
+
+/* ACTIVE TAB CONTENT */
+.active-tab {
+  display: block;
+}
 body {
     font-family: Arial, sans-serif;
     background: #f4f4f4;
