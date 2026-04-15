@@ -15,15 +15,16 @@ body {
 
 /* HEADER */
 .header {
-  position: absolute;
+  position: fixed;
   top: 0;
   width: 100%;
   display: flex;
   align-items: center;
   gap: 40px;
   padding: 15px 30px;
+  background: #0b3d91;
   color: white;
-  z-index: 10;
+  z-index: 1000;
 }
 
 .logo {
@@ -34,7 +35,6 @@ body {
 .nav {
   display: flex;
   gap: 20px;
-  justify-content: flex-start;
 }
 
 .tablink {
@@ -60,11 +60,12 @@ body {
   background: #ffcc00;
 }
 
-/* SLIDER */
+/* HERO (ABOUT ONLY) */
 .slider {
   position: relative;
   height: 100vh;
   overflow: hidden;
+  margin-top: 70px; /* prevent overlap with fixed header */
 }
 
 .slides {
@@ -74,7 +75,6 @@ body {
   display: none;
 }
 
-/* OVERLAY */
 .overlay {
   position: absolute;
   width: 100%;
@@ -92,18 +92,9 @@ body {
   font-size: 50px;
 }
 
-.overlay-buttons a {
-  background: #1e2a78;
-  color: white;
-  padding: 12px 20px;
-  margin: 10px;
-  text-decoration: none;
-  border-radius: 5px;
-}
-
-/* SECTIONS */
+/* CONTENT */
 .section {
-  padding: 40px 20px;
+  padding: 100px 20px 40px;
   max-width: 1000px;
   margin: auto;
 }
@@ -136,61 +127,65 @@ footer {
 
 <body>
 
-<!-- HERO -->
-<div class="slider">
+<!-- HEADER -->
+<header class="header">
+  <div style="display:flex; align-items:center; gap:10px;">
+    <img src="image/logo.png" class="logo">
+    <strong>CAAL</strong>
+  </div>
 
-  <header class="header">
-    <div style="display:flex; align-items:center; gap:10px;">
-      <img src="image/logo.png" class="logo">
-      <strong>CAAL</strong>
-    </div>
+  <nav class="nav">
+    <button class="tablink active" onclick="openTab(event,'about')">About</button>
+    <button class="tablink" onclick="openTab(event,'education')">Education</button>
+    <button class="tablink" onclick="openTab(event,'events')">Events</button>
+    <button class="tablink" onclick="openTab(event,'membership')">Membership</button>
+    <button class="tablink" onclick="openTab(event,'contact')">Contact</button>
+  </nav>
+</header>
 
-    <nav class="nav">
-      <button class="tablink active" onclick="openTab(event,'about')">About</button>
-      <button class="tablink" onclick="openTab(event,'education')">Education</button>
-      <button class="tablink" onclick="openTab(event,'events')">Events</button>
-      <button class="tablink" onclick="openTab(event,'membership')">Membership</button>
-      <button class="tablink" onclick="openTab(event,'contact')">Contact</button>
-    </nav>
-  </header>
-
-  <!-- SLIDES -->
+<!-- HERO (ONLY FOR ABOUT) -->
+<div class="slider" id="hero">
   <img class="slides" src="image/picture1.jpeg">
   <img class="slides" src="image/picture2.jpeg">
 
-  <!-- OVERLAY -->
   <div class="overlay">
     <h1>Welcome to CAAL</h1>
     <p>Safe Anaesthesia • Professional Excellence • Collaboration</p>
   </div>
-
 </div>
 
-<!-- CONTENT -->
-
+<!-- ABOUT -->
 <section id="about" class="section tabcontent active-tab">
   <div class="card">
     <h2>About CAAL</h2>
     <p>
-      The Clinical Anaesthetists Association of Lesotho represents professionals dedicated to safe anaesthetic care.
+      The Clinical Anaesthetists Association of Lesotho represents professionals dedicated to safe and effective anaesthetic care.
     </p>
   </div>
 </section>
 
+<!-- EDUCATION -->
 <section id="education" class="section tabcontent">
-  <div class="card">Training & Professional Development</div>
-</section>
-
-<section id="events" class="section tabcontent">
-  <div class="card">General Meeting - 15 April 2026</div>
-</section>
-
-<section id="membership" class="section tabcontent">
   <div class="card">
-    Membership is open to qualified clinical practitioners registered in Lesotho.
+    Training & Continuous Professional Development
   </div>
 </section>
 
+<!-- EVENTS -->
+<section id="events" class="section tabcontent">
+  <div class="card">
+    General Meeting – 15 April 2026
+  </div>
+</section>
+
+<!-- MEMBERSHIP -->
+<section id="membership" class="section tabcontent">
+  <div class="card">
+    Membership is open to qualified practitioners registered in Lesotho.
+  </div>
+</section>
+
+<!-- CONTACT -->
 <section id="contact" class="section tabcontent">
   <div class="card">
     <p>Email: clinicalanaesthetists@gmail.com</p>
@@ -227,20 +222,31 @@ function showSlides() {
   setTimeout(showSlides, 4000);
 }
 
-// TAB SYSTEM
+// TAB SYSTEM + HERO CONTROL
 function openTab(evt, tabId) {
   let contents = document.getElementsByClassName("tabcontent");
   let links = document.getElementsByClassName("tablink");
+  let hero = document.getElementById("hero");
 
+  // hide all sections
   for (let i = 0; i < contents.length; i++) {
     contents[i].classList.remove("active-tab");
   }
 
+  // remove active buttons
   for (let i = 0; i < links.length; i++) {
     links[i].classList.remove("active");
   }
 
+  // show selected section
   document.getElementById(tabId).classList.add("active-tab");
+
+  // show hero only on ABOUT
+  if (tabId === "about") {
+    hero.style.display = "block";
+  } else {
+    hero.style.display = "none";
+  }
 
   if (evt) evt.currentTarget.classList.add("active");
 }
