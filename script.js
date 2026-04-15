@@ -16,3 +16,23 @@ async function loadUpdates() {
 }
 
 loadUpdates();
+<script>
+// TAB FUNCTION
+function openTab(tabId) {
+  let tabs = document.getElementsByClassName("tabcontent");
+
+  // hide all sections
+  for (let i = 0; i < tabs.length; i++) {
+    tabs[i].style.display = "none";
+  }
+
+  // show selected section
+  document.getElementById(tabId).style.display = "block";
+}
+
+// Show default tab on load
+window.onload = function () {
+  showSlides(); // keep your slider working
+  openTab("about"); // default tab
+};
+</script>
